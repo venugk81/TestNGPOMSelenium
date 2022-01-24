@@ -9,7 +9,7 @@ import com.base.BasePage;
 
 public class LoginPage{
 	WebDriver driver;
-
+	BasePage page;
 	@FindBy(xpath="//input[contains(@name, 'name')]")
 	WebElement txtName;
 	
@@ -24,17 +24,20 @@ public class LoginPage{
 	public LoginPage(WebDriver _driver) {
 		driver= _driver;
 		PageFactory.initElements(driver, this);
+		page = new BasePage();
 		
 	}
 	
 	public void signupRegistrationForm() {
-		txtName.sendKeys("testing");
+//		txtName.sendKeys("testing");
+		page.sendText(txtName, "testing");
 		txtEmail.sendKeys("testing@gmail.com");
 	}
 	
 	public String validateLoginTitle() {
 		return driver.getTitle();
 	}
+	
 	
 	
 }
