@@ -13,12 +13,13 @@ import org.testng.Assert;
 public class ExcelReader {
 
 	//https://www.callicoder.com/java-read-excel-file-apache-poi/
-	String filePath = "/src/main/resources/data/testdata.xlsx";
+	public static String filePath = "/src/main/resources/data/testdata.xlsx";
 	
-	Workbook workbook;
-	Sheet sheet;
-	Object data[][];
+	static Workbook workbook;
+	public static Sheet sheet;
+	static Object data[][];
 	
+	/*
 	public ExcelReader() {
 		try {
 			File f = new File(System.getProperty("user.dir")+ filePath);
@@ -33,13 +34,26 @@ public class ExcelReader {
 			Assert.fail("Failed to read excel data from filepath: "+ filePath);
 		}
 	}
+	*/
 	
-	public void readData(String sheetname) {
+	
+	public static Object[][] readData(String sheetname) {
+		try {
+			File f = new File(System.getProperty("user.dir")+ filePath);
+			System.out.println(f.getAbsolutePath());
+			if(f.exists()) {
+				workbook = WorkbookFactory.create(new FileInputStream(f));				
+			}			
+			
+		}catch(Exception oExp)
+		{
+			Assert.fail("Failed to read excel data from filepath: "+ filePath);
+		}
 		
 		try {
 			sheet = workbook.getSheet(sheetname);
 			int rowCount = sheet.getLastRowNum();
-			data = new Object[rowCount+1][1];
+			data = new Object[rowCount][1];
 			String[] headers= new String[rowCount];
 			
 			for(int col=0; col<sheet.getRow(0).getLastCellNum(); col++) {
@@ -49,31 +63,40 @@ public class ExcelReader {
 			for(int row=1; row<=rowCount; row++) {
 				Map<String, String> map = new LinkedHashMap<String, String>();
 				for(int col=0; col< sheet.getRow(row).getLastCellNum(); col++){
-					System.out.println(sheet.getRow(row).getCell(col).toString());
+//					System.out.println(sheet.getRow(row).getCell(col).toString());
 					map.put(headers[col], sheet.getRow(row).getCell(col).toString());
 				}
-				data[row][0] = map;
+				data[row-1][0] = map;
 				
 				
 			}
 			
 			workbook.close();
-			Map<String, String> m1= (Map<String, String>) data[1][0];
+			Map<String, String> m1= (Map<String, String>) data[0][0];
 			System.out.println(m1.keySet());
-			System.out.println(			m1.get("TestName"));
+			System.out.println(m1.get("TestName"));
+			
+			m1= (Map<String, String>) data[1][0];
+			System.out.println(m1.keySet());
+			System.out.println(m1.get("TestName"));
 			
 			m1= (Map<String, String>) data[2][0];
 			System.out.println(m1.keySet());
-			System.out.println(			m1.get("TestName"));
+			System.out.println(m1.get("TestName"));
+			
+			System.out.println("Length of the rows in the data obj data.length: "+ data.length);
+			System.out.println("==================================");
 						
 		}catch(Exception oExp) {
 			oExp.printStackTrace();
 		}
+		
+		return data;
 	}
 	
 	public static void main(String[] args) {
-		ExcelReader ex = new ExcelReader();
-		ex.readData("RegisterUser");
+//		ExcelReader ex = new ExcelReader();
+		ExcelReader.readData("RegisterUser");
 	}
 	
 }
