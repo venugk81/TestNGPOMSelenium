@@ -1,5 +1,8 @@
 package com.tests;
 
+import java.io.File;
+
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,13 +23,14 @@ public class LoginTest extends BasePage{
 	public void setUp() {
 		initialization();
 		loginPage = new LoginPage(driver);
-				
+		System.out.println("File separator: "+ File.separator);		
 	}
 	
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		System.out.println("I am in Login Test java");
 		loginPage.signupRegistrationForm();
+		
 	}
 	
 	@AfterTest

@@ -9,10 +9,14 @@ import java.util.Properties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.events.WebDriverListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import com.utils.WebDriverEventListenerUtil;
 
 
 public class BasePage {
@@ -37,9 +41,19 @@ public class BasePage {
 	}
 	
 	public void initialization() {
+		
 		if(prop.getProperty("browser").equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", chromePath);
+//			System.setProperty("webdriver.chrome.logfile", "Testlog.txt");	// for logs 
 			driver = new ChromeDriver();
+			//Configure WebDriver Event Listener which listens to all the webdriver actions/events..
+			EventFiringWebDriver _driver = new EventFiringWebDriver(driver);
+			//This class implements web driver event listener interface methods..
+			WebDriverEventListenerUtil driverEventListenerUtil = new WebDriverEventListenerUtil();
+			//Register the class with even firing web driver
+			_driver.register(driverEventListenerUtil);
+			//Assign it to the driver.. Rest of the flow remains same.. 
+			driver = _driver;
 		}
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -154,6 +168,8 @@ public class BasePage {
 		}
 		return strAttributeValue;
 	}
+	
+	
 	
 	
 	

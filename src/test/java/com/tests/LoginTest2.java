@@ -24,7 +24,7 @@ public class LoginTest2 extends BasePage{
 	}
 	
 	@Test
-	public void test() {
+	public void test() throws Exception {
 		System.out.println("I am in Login Test java");
 		loginPage.signupRegistrationForm();
 	}
