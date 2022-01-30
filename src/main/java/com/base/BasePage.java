@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import com.utils.ExtentReportUtil;
 import com.utils.WebDriverEventListenerUtil;
 
 
@@ -24,6 +25,7 @@ public class BasePage {
 	public WebDriver driver;
 	public String chromePath = System.getProperty("user.dir") + "/drivers/chromedriver.exe";
 	public Properties prop;
+	public ExtentReportUtil extReportUtil;
 	
 	public BasePage() {
 		try {
@@ -43,6 +45,7 @@ public class BasePage {
 	public void initialization() {
 		
 		if(prop.getProperty("browser").equals("chrome")) {
+					
 			System.setProperty("webdriver.chrome.driver", chromePath);
 //			System.setProperty("webdriver.chrome.logfile", "Testlog.txt");	// for logs 
 			driver = new ChromeDriver();

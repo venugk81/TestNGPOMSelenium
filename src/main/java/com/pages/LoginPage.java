@@ -27,7 +27,7 @@ public class LoginPage{
 		driver= _driver;
 		PageFactory.initElements(driver, this);
 		page = new BasePage();
-		CaptureScreenshotUtil.captureScreen(driver);
+//		CaptureScreenshotUtil.captureScreen(driver);
 		
 	}
 	

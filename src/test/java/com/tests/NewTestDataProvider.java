@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 import com.utils.ExcelReader;
 
-public class NewTest {
+public class NewTestDataProvider {
 	
 	String sheetname="RegisterUser";
 	Object data[][];
