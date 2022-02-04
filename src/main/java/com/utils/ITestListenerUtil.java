@@ -29,6 +29,7 @@ public class ITestListenerUtil implements ITestListener{
 		onTestFailure(result);
 	}
 	public void onStart(ITestContext context) {
+		
 		System.out.println("onStart Test onStart" + context.getOutputDirectory());
 	}
 

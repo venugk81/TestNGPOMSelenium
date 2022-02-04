@@ -1,6 +1,7 @@
 package com.utils;
 
 import org.openqa.selenium.WebDriver;
+import static java.lang.Math.*;
 
 class Animal {
 	int a = 10;
@@ -10,6 +11,8 @@ class Animal {
 	
 	public void ini(){
 		driver= "driver initialized";
+		sqrt(132);		//Static import example	import static java.lang.Math.*;
+
 	}
 	
 	Animal(){

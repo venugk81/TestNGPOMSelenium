@@ -32,7 +32,7 @@ public class ExtentReportUtil {
 	}
 	
 	public void flushReport() {
-		reports.flush();
+		reports.flush(); 
 	}
 
 }
