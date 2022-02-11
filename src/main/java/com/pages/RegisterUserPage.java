@@ -41,7 +41,7 @@ public class RegisterUserPage{
 	WebElement lnkHome;
 	
 	public RegisterUserPage(WebDriver _driver) {
-		driver= _driver;
+		driver = _driver;
 		PageFactory.initElements(driver, this);
 		page = new BasePage();
 		
